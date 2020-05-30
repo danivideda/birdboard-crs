@@ -70,7 +70,7 @@
             </div>
         </nav>
 
-        <main class="container mx-auto py-4">
+        <main class="container mx-auto py-4 px-3">
             @yield('content')
         </main>
     </div>
