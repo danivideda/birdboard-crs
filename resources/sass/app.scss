@@ -38,6 +38,18 @@
   * @import "components/buttons";
   * @import "components/forms";
   */
+
+  .button {
+    @apply bg-blue;
+    @apply no-underline;
+    @apply text-white;
+    @apply text-sm;
+    @apply rounded-lg;
+    @apply py-2;
+    @apply px-5;
+
+    box-shadow: 0 2px 7px 0 #b0eaff;
+  }
  
  /**
   * This injects all of Tailwind's utility classes, generated based on your
