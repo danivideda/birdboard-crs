@@ -19,14 +19,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-grey-light">
+<body class="bg-grey-lighter">
     <div id="app">
         <!-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm"> -->
         <nav class="bg-white">
             <div class="container mx-auto">
                 <div class="flex justify-between items-center py-2">
                     <h1>
-                        <a class="navbar-brand" href="{{ url('/') }}">
+                        <a class="navbar-brand" href="{{ url('/projects') }}">
                             <img src="/images/logo.svg" alt="Birdboard">
                         </a>
                     </h1>
