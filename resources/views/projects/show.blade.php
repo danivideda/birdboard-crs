@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
-@section('content')
+@section ('content')
 
   <header class="flex items-center mb-4 py-4">
     <div class="flex justify-between items-end w-full">
@@ -17,11 +17,9 @@
         <div class="mb-8">
           <h2 class="text-grey font-normal text-lg mb-3">Tasks</h2>
           <!-- tasks -->
-          <div class="card mb-3">Lorem ipsum dolor sit amet.</div>
-          <div class="card mb-3">Lorem ipsum dolor sit amet.</div>
-          <div class="card mb-3">Lorem ipsum dolor sit amet.</div>
-          <div class="card mb-3">Lorem ipsum dolor sit amet.</div>
-          <div class="card">Lorem ipsum dolor sit amet.</div>
+          @foreach ($project->tasks as $task)
+            <div class="card mb-3">{{ $task->body }}</div>
+          @endforeach
         </div>
 
         <div>
