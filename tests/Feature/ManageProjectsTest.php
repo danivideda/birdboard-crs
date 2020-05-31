@@ -53,6 +53,8 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_user_can_update_a_project()
     {
+        $this->withoutExceptionHandling();
+
         $project = ProjectFactory::create();
 
         $this->actingAs($project->owner)
@@ -72,7 +74,7 @@ class ManageProjectsTest extends TestCase
         $this->actingAs($project->owner)
             ->patch($project->path(), $attributes = ['notes' => 'Changed']);
 
-        $this->assertDatabaseHas('projects', $attributes);    
+        $this->assertDatabaseHas('projects', $attributes);
     }
 
     /** @test */
@@ -93,7 +95,7 @@ class ManageProjectsTest extends TestCase
 
         $project = factory('App\Project')->create();
 
-        $this->get($project->path())->assertStatus(403);        
+        $this->get($project->path())->assertStatus(403);
     }
 
     /** @test */
@@ -104,7 +106,7 @@ class ManageProjectsTest extends TestCase
 
         $project = factory('App\Project')->create();
 
-        $this->patch($project->path())->assertStatus(403);        
+        $this->patch($project->path())->assertStatus(403);
     }
 
     /** @test */

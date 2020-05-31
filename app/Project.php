@@ -3,10 +3,25 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
+use Illuminate\Support\Arr;
 
 class Project extends Model
 {
+    // /**
+    //  * Prepare a date for array / JSON serialization.
+    //  *
+    //  * @param  \DateTimeInterface  $date
+    //  * @return string
+    //  */
+    // protected function serializeDate(DateTimeInterface $date)
+    // {
+    //     return $date->format('Y-m-d H:i:s');
+    // }
+
     protected $guarded = [];
+
+    public $old = [];
 
     public function path()
     {
@@ -30,7 +45,20 @@ class Project extends Model
 
     public function recordActivity($description)
     {
-        $this->activity()->create(compact('description'));
+        $this->activity()->create([
+            'description' => $description,
+            'changes' => $this->activityChanges($description)
+        ]);
+    }
+
+    protected function activityChanges($description)
+    {
+        if ($description == 'updated') {
+            return [
+                'before' => Arr::except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
+                'after' => Arr::except($this->getChanges(), 'updated_at')
+            ];
+        }
     }
 
     public function activity()
