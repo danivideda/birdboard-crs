@@ -3,51 +3,74 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Task extends Model
 {
-   protected $guarded = [];
+    use RecordsActivity;
 
-   protected $touches = ['project'];
+    /**
+     * Attributes to guard against mass assignment.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 
-   protected $casts =[
-      'completed' => 'boolean'
-   ];
+    /**
+     * The relationships that should be touched on save.
+     *
+     * @var array
+     */
+    protected $touches = ['project'];
 
-   public function complete()
-   {
-      $this->update(['completed' => true]);
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts =[
+        'completed' => 'boolean'
+    ];
 
-      $this->recordActivity('completed_task');
-   }
+    protected static $recordableEvents = ['created', 'deleted'];
 
-   public function incomplete()
-   {
-      $this->update(['completed' => false]);
-
-      $this->recordActivity('incompleted_task');
-   }
-
-   public function project()
-   {
-       return $this->belongsTo(Project::class);
-   }
-
-   public function path()
-   {
-      return "/projects/{$this->project->id}/tasks/{$this->id}";
-   }
-
-   public function recordActivity($description)
+    /**
+     * Mark the task as complete.
+     */
+    public function complete()
     {
-        $this->activity()->create([
-            'project_id' => $this->project_id,
-            'description' => $description
-        ]);
+        $this->update(['completed' => true]);
+
+        $this->recordActivity('completed_task');
     }
 
-    public function activity()
+    /**
+     * Mark the task as incomplete.
+     */
+    public function incomplete()
     {
-        return $this->morphMany(Activity::class, 'subject')->latest();
+        $this->update(['completed' => false]);
+
+        $this->recordActivity('incompleted_task');
+    }
+
+    /**
+     * Get the owning project.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Get the path to the task.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return "/projects/{$this->project->id}/tasks/{$this->id}";
     }
 }
