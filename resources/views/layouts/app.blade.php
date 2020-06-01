@@ -48,7 +48,9 @@
                             @else
                                 <li class="nav-item dropdown list-reset">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                        <img width="35"
+                                                 class="rounded-full mr-3"
+                                                 src="{{ gravatar_url(auth()->user()->email) }}">
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
