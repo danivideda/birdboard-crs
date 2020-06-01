@@ -1,6 +1,6 @@
-@extends ('layouts.app')
+@extends('layouts.app')
 
-@section ('content')
+@section('content')
 
 <header class="flex items-center mb-4 py-4">
 <div class="flex justify-between items-end w-full">
@@ -54,38 +54,35 @@
                 </div>
             </div>
 
-        <div>
-            <h2 class="text-grey font-normal mb-3">General Notes</h2>
-            <!-- general notes -->
-            <form method="POST" action="{{ $project->path() }}">
-            @csrf
-            @method ('PATCH')
+            <div>
+                <h2 class="text-grey font-normal mb-3">General Notes</h2>
+                <!-- general notes -->
+                <form method="POST" action="{{ $project->path() }}">
+                    @csrf
+                    @method ('PATCH')
 
-            <textarea
-                name="notes"
-                class="card w-full mb-4"
-                style="min-height: 200px;"
-                placeholder="Anyting special that you want to make a note of?"
-            >{{ $project->notes }}</textarea>
+                    <textarea
+                        name="notes"
+                        class="card w-full mb-4"
+                        style="min-height: 200px;"
+                        placeholder="Anyting special that you want to make a note of?"
+                    >{{ $project->notes }}</textarea>
 
-            <button type="submit" class="button">Save</button>
-            </form>
+                    <button type="submit" class="button">Save</button>
+                </form>
 
-            @if ($errors->any())
-            <div class="field mt-6">
-                @foreach ($errors->all() as $error)
-                <li class="text-sm text-red">{{ $error }}</li>
-                @endforeach
+                @include('errors')
             </div>
-            @endif
-        </div>
         </div>
 
         <div class="lg:w-1/4 px-3">
-        @include ('projects.card')
-        @include ('projects.activity.card')
-        </div>
+            @include('projects.card')
+            @include('projects.activity.card')
 
+            @can('manage', $project)
+                @include('projects.invite')
+            @endcan
+        </div>
     </div>
 </main>
 
