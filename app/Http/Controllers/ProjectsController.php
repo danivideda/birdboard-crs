@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
+    /**
+     * View all projects.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $projects = auth()->user()->projects;
@@ -14,6 +19,14 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
+    /**
+     * Show a single project.
+     *
+     * @param Project $project
+     *
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function show(Project $project)
     {
         $this->authorize('update', $project);
@@ -21,11 +34,21 @@ class ProjectsController extends Controller
         return view('projects.show', compact('project'));
     }
 
+    /**
+     * Create a new project.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('projects.create');
     }
 
+    /**
+     * Persist a new project.
+     *
+     * @return mixed
+     */
     public function store()
     {
 
@@ -35,6 +58,12 @@ class ProjectsController extends Controller
         return redirect($project->path());
     }
 
+    /**
+     * Edit the project.
+     *
+     * @param  Project $project
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Project $project)
     {
        return view('projects.edit', compact('project'));
@@ -50,12 +79,26 @@ class ProjectsController extends Controller
     }
 
     /**
+     * Destroy the project.
+     *
+     * @param  Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Project $project)
+    {
+        $this->authorize('update', $project);
+        $project->delete();
+        return redirect('/projects');
+    }
+
+    /**
      * @return array
      */
     protected function validateRequest()
     {
         return request()->validate([
-            'title' => 'sometimes|required', 
+            'title' => 'sometimes|required',
             'description' => 'sometimes|required',
             'notes' => 'nullable'
         ]);
