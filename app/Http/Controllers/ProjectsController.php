@@ -37,7 +37,7 @@ class ProjectsController extends Controller
     /**
      * Create a new project.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
@@ -53,6 +53,14 @@ class ProjectsController extends Controller
     {
 
         $project = auth()->user()->projects()->create($this->validateRequest());
+
+        if ($tasks = request('tasks')) {
+            $project->addTasks($tasks);
+        };
+
+        if (request()->wantsJson()) {
+            return ['message' => $project->path()];
+        }
 
         // redirect
         return redirect($project->path());
