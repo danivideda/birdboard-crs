@@ -22,7 +22,7 @@
   * @import "tailwindcss/components";
   */
  @tailwind components;
- 
+
  /**
   * Here you would add any of your custom component classes; stuff that you'd
   * want loaded *before* the utilities so that the utilities could still
@@ -40,7 +40,7 @@
   */
 
   .button {
-    @apply bg-blue;
+    @apply bg-button;
     @apply no-underline;
     @apply text-white;
     @apply text-sm;
@@ -52,12 +52,14 @@
   }
 
   .card {
-    @apply bg-white;
+    @apply bg-card;
     @apply p-5;
     @apply rounded-lg;
     @apply shadow;
+
+    color: var(--text-default-color);
   }
- 
+
  /**
   * This injects all of Tailwind's utility classes, generated based on your
   * config file.
@@ -67,7 +69,7 @@
   * @import "tailwindcss/utilities";
   */
  @tailwind utilities;
- 
+
  /**
   * Here you would add any custom utilities you need that don't come out of the
   * box with Tailwind.
@@ -82,3 +84,21 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
+
+  .theme-light {
+      --page-background-color: #f5f6f9;
+      --card-background-color: white;
+      --button-background-color: #47cdff;
+      --header-background-color: white;
+
+    --text-default-color: #222;
+  }
+
+  .theme-dark {
+    --page-background-color: #17181e;
+    --card-background-color: #1f2027;
+    --button-background-color: #59b6f9;
+    --header-background-color: #1f2027;
+
+    --text-default-color: #fff;
+}
