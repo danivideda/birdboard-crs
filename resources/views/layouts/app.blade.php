@@ -44,22 +44,25 @@
                         <div class="flex items-center ml-auto">
                             <!-- Authentication Links -->
                             @guest
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="text-accent mr-4 no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
+
                                 @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="text-accent no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             @else
                                 <theme-switcher></theme-switcher>
 
                                 <dropdown align="right" width="200px">
                                     <template v-slot:trigger>
-                                        <button class="flex items-center text-default no-underline text-sm">
+                                        <button
+                                            class="flex items-center text-default no-underline text-sm focus:outline-none"
+                                            v-pre
+                                        >
                                             <img width="35"
-                                                    class="rounded-full mr-3"
-                                                    src="{{ gravatar_url(auth()->user()->email) }}">
+                                                 class="rounded-full mr-3"
+                                                 src="{{ gravatar_url(auth()->user()->email) }}">
 
                                             {{ auth()->user()->name }}
-                                            {{-- DaniIhza --}}
                                         </button>
                                     </template>
 
@@ -68,12 +71,9 @@
 
                                         <button type="submit" class="dropdown-menu-link w-full text-left">Logout</button>
                                     </form>
-
                                 </dropdown>
-
-
-                                @endguest
-                            </div>
+                            @endguest
+                        </div>
                     </div>
                 </div>
             </div>
