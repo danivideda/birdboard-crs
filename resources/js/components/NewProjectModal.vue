@@ -1,5 +1,9 @@
 <template>
-  <modal name="new-project" classes="p-10 bg-card rounded-lg" height="auto">
+  <modal
+    name="new-project"
+    pivotY="0.15"
+    classes="p-10 bg-card rounded-lg"
+    height="auto">
         <h1 class="font-normal mb-16 text-center text-2xl">Let's Start Something New</h1>
 
         <form @submit.prevent="submit">

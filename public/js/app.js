@@ -2060,6 +2060,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3451,6 +3455,7 @@ var render = function() {
     {
       attrs: {
         name: "new-project",
+        pivotY: "0.15",
         classes: "p-10 bg-card rounded-lg",
         height: "auto"
       }
