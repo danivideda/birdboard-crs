@@ -16,6 +16,7 @@ A trello like webapp using Laravel as the framework and MySQL for the database
     > git clone https://github.com/danivideda/birdboard-crs.git
 2. install dependencies :
     > composer install
+    
     > npm install
 3. Create the .env file and setup the database from your local machine (I've used my own database using MySQL)
     > cp .env.example .env
